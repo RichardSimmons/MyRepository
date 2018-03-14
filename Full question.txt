@@ -1,0 +1,44 @@
+The input will consist of a series of arithmetic expressions given in postfix or Reverse Polish Notation (RPN).
+
+In RPN, the operands come before the operator. For example, you normally see multiplication written in infix
+notation as (a * b). In RPN, this expression would appear as (a b *). For expressions with more than one
+operator, each time an operator is encountered, it is applied to the two immediately preceding subexpressions.
+
+For example, (a + b * c) in infix notation would be (a b c * +) in RPN. This means that
+operands b and c are multiplied, then the results of the multiplication are added to operand a. In RPN,
+operator precedence is not required because operators are always evaluated left to right. Thus, the
+expression ((a + b) * c) is written (a b + c *) in RPN.
+
+Input operands consist of a string of digits, and may be of any length. You should trim any zeros appearing at
+the beginning of an operand (e.g. 000231 should be stored as 231). Expressions may also be of any length.
+Spaces and line breaks may appear within the expression arbitrarily, with the rule that a space or line break
+terminates an operand, and a blank line (i.e., two line breaks in a row) terminates an expression.
+
+The operations are limited to addition (+), multiplication (*), and exponentiation (^). An error should be
+reported whenever the number of operators and operands are inconsistent (i.e., if there are no operands to
+the left of an operator, or if the expression ends without providing sufficient operators).
+
+
+When an error is detected, processing should stop on the current expression, and your program should
+proceed to the next expression. For each expression, echo the input, followed by the result of the operation, or
+an error message, as appropriate. Be sure that the result is clearly marked on the output for readability.
+
+The main problem in this project is implementation of infinite precision integers and calculation of the
+arithmetic operations +, *, and ^.
+Integers are to be represented in your program by a linked list of digits, one digit per list node. Each digit may
+be represented as a character or as an integer, as you prefer.
+
+Addition is easily performed by starting with the low order digits of the two integers, and add each pair of digits
+as you move to the high order digits. 
+
+Multiplication is performed by multiplying the low order digit of the second operand against the entire first
+operand. Then the next digit of the second operand is multiplied against the first number, with a “0” placed at
+the end. This partial result is added to the partial result obtained from multiplying the previous digit. The
+process of multiplying by the next digit and adding to the previous partial result is repeated until the full
+multiplication has been completed.
+
+Exponentiation is performed by multiplying the first operand to itself the appropriate number of times,
+decrementing the exponent once each time until done. In order to simplify implementation, you are guaranteed
+the exponent will be small enough to fit in an integer variable (C++ int datatype). You should write a routine to
+convert a number from the list representation to an integer variable, and use this to convert the top operand on
+the stack when the exponentiation operator is encountered. Be careful with exponents of 0 or 1.
